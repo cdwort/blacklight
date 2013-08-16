@@ -25,6 +25,8 @@ module Blacklight
 
   autoload :OpenStructWithHashAccess, 'blacklight/utils'
   autoload :SolrResponse, 'blacklight/solr_response'
+  autoload :Pagination, 'blacklight/pagination'
+  autoload :Facet, 'blacklight/facet'
 
   extend SearchFields
   

@@ -5,28 +5,7 @@ module Blacklight::CatalogHelperBehavior
   # it translates to a Kaminari-paginatable
   # object, with the keys Kaminari views expect.
   def paginate_params(response)
-
-    per_page = response.rows
-    per_page = 1 if per_page < 1
-
-    current_page = (response.start / per_page).ceil + 1
-    num_pages = (response.total / per_page.to_f).ceil
-
-    total_count = response.total
-
-    start_num = response.start + 1
-    end_num = start_num + response.docs.length - 1
-
-    OpenStruct.new(:start => start_num,
-                   :end => end_num,
-                   :per_page => per_page,
-                   :current_page => current_page,
-                   :num_pages => num_pages,
-                   :limit_value => per_page, # backwards compatibility
-                   :total_count => total_count,
-                   :first_page? => current_page > 1,
-                   :last_page? => current_page < num_pages
-      )
+    Blacklight::Pagination.paginate_params(response)
   end
 
   # Equivalent to kaminari "paginate", but takes an RSolr::Response as first argument.
